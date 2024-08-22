@@ -1,0 +1,4 @@
+all: nocluecoin
+
+nocluecoin:
+	$(CXX) -o nocluecoin src/*.cpp src/consensus/*.cpp src/crypto/*.cpp src/wallet/*.cpp src/miner/*.cpp src/rpc/*.cpp src/net.cpp -lssl -lcrypto -lboost_system -pthread

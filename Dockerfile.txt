@@ -1,0 +1,47 @@
+# Use an official Ubuntu as the base image
+FROM ubuntu:20.04
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libboost-all-dev \
+    libevent-dev \
+    libdb-dev \
+    libdb++-dev \
+    autoconf \
+    libtool \
+    pkg-config \
+    git \
+    wget \
+    curl
+
+# Create a directory for the application
+WORKDIR /opt/nocluecoin
+
+# Copy the blockchain source code into the container
+COPY ./src /opt/nocluecoin/src
+COPY ./doc /opt/nocluecoin/doc
+
+# Build the source code
+WORKDIR /opt/nocluecoin/src
+RUN ./autogen.sh && ./configure && make -j$(nproc)
+
+# Expose the P2P and RPC ports
+EXPOSE 8333 8332
+
+# Set environment variables
+ENV COIN_HOME="/root/.nocluecoin"
+ENV PATH="/opt/nocluecoin/src:$PATH"
+
+# Create configuration folder
+RUN mkdir -p $COIN_HOME
+
+# Optional: Create default configuration file
+RUN echo "rpcuser=user\nrpcpassword=pass\nserver=1\ndaemon=1\n" > $COIN_HOME/nocluecoin.conf
+
+# Start the NoClueCoin daemon
+ENTRYPOINT ["nocluecoind"]
+
+# Run the NoClueCoin node
+CMD ["-conf=/root/.nocluecoin/nocluecoin.conf", "-datadir=/root/.nocluecoin"]

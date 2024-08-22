@@ -1,0 +1,48 @@
+NoClueCoin/
+├── src/
+│   ├── chainparams.cpp
+│   ├── consensus/
+│   │   ├── consensus.h
+│   │   ├── merkle.cpp
+│   │   └── merkle.h
+│   ├── crypto/
+│   │   ├── sha256.cpp
+│   │   ├── sha256.h
+│   │   ├── pow.cpp
+│   │   └── pow.h
+│   ├── main.cpp
+│   ├── wallet/
+│   │   ├── wallet.cpp
+│   │   ├── wallet.h
+│   ├── miner/
+│   │   ├── miner.cpp
+│   │   └── miner.h
+│   ├── rpc/
+│   │   ├── rpc.cpp
+│   │   └── rpc.h
+│   ├── net.cpp
+│   ├── net.h
+│   ├── util.cpp
+│   ├── util.h
+│   ├── genesis.py
+│   └── Makefile
+├── doc/
+│   ├── README.md
+│   ├── INSTALL.md
+│   ├── CONFIG.md
+│   └── CONTRIBUTING.md
+├── test/
+│   ├── unittests/
+│   │   ├── test_genesis.cpp
+│   │   ├── test_blockchain.cpp
+│   │   └── CMakeLists.txt
+│   ├── functional_tests/
+│   │   ├── test_mining.py
+│   │   └── test_transaction.py
+│   └── Makefile
+├── contrib/
+│   ├── bash_completion/
+│   ├── init/
+│   └── scripts/
+├── Dockerfile
+└── LICENSE
